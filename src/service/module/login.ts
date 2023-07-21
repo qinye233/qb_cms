@@ -1,12 +1,9 @@
-import qbRequset from "..";
+import type { Account } from '@/types'
+import qbRequset from '..'
 
-export default function login(username: string, password: string) {
-  qbRequset.post({
-    url: "/login",
-    data: {
-      username,
-      password,
-    }
+export default function login(account: Account) {
+  return qbRequset.post({
+    url: '/login',
+    data: account
   })
 }
-

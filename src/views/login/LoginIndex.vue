@@ -1,12 +1,19 @@
 <template>
   <div class="login-index">
-    <div>这里是一个登录界面</div>
+    <login-panel />
   </div>
 </template>
 
 <script setup lang="ts">
+import LoginPanel from './cpns/LoginPanel.vue'
 </script>
 
 <style scoped lang="less">
-
+.login-index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
 </style>
