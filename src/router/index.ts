@@ -15,7 +15,41 @@ const router = createRouter({
     },
     {
       path: '/main',
-      component: () => import('../views/mian/MainIndex.vue')
+      component: () => import('../views/mian/MainIndex.vue'),
+      children: [
+        {
+          path: '/main/overview/technology',
+          component: () => import('../views/mian//cpns/MainContentCpns/OverviewTechnology.vue')
+        },
+        {
+          path: '/main/overview/commodity',
+          component: () => import('../views/mian/cpns/MainContentCpns/OverviewCommodity.vue')
+        },
+        {
+          path: '/main/admin/user',
+          component: () => import('../views/mian/cpns/MainContentCpns/AdminUser.vue')
+        },
+        {
+          path: '/main/admin/department',
+          component: () => import('../views/mian/cpns/MainContentCpns/AdminDepartment.vue')
+        },
+        {
+          path: '/main/admin/menu',
+          component: () => import('../views/mian/cpns/MainContentCpns/AdminMenu.vue')
+        },
+        {
+          path: '/main/admin/role',
+          component: () => import('../views/mian/cpns/MainContentCpns/AdminRole.vue')
+        },
+        {
+          path: '/main/center/category',
+          component: () => import('../views/mian/cpns/MainContentCpns/CenterCategory.vue')
+        },
+        {
+          path: '/main/admin/info',
+          component: () => import('../views/mian/cpns/MainContentCpns/CenterInfo.vue')
+        }
+      ]
     },
     {
       path: '/:pathMatch(.*)',
@@ -27,9 +61,13 @@ const router = createRouter({
 // 路由守卫判断是否登录
 router.beforeEach((to) => {
   const token = localStorage.getItem(LOGIN_TOKEN)
-
+  // 验证是否登录
   if (to.path === '/main' && !token) {
     return '/login'
+  }
+  // 初始化页面
+  if (to.path === '/main') {
+    return '/main/overview/technology'
   }
 })
 

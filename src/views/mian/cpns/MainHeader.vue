@@ -30,7 +30,7 @@
         />
         <el-dropdown @command="handleItem">
           <span class="el-dropdown-link">
-            {{ name }}
+            quirkybird
             <el-icon><arrow-down /></el-icon>
           </span>
           <template #dropdown>
@@ -50,10 +50,6 @@
 import { LOGIN_TOKEN } from '@/constants'
 import router from '@/router'
 import { ref } from 'vue'
-import useAccountStore from '@/stores/account/account'
-import { storeToRefs } from 'pinia'
-const accountStore = useAccountStore()
-const { name } = storeToRefs(accountStore)
 
 const isCollapse = ref(false)
 const emit = defineEmits(['changeCollapse'])

@@ -10,7 +10,7 @@
       status-icon
       ref="loginFormRef"
     >
-      <el-form-item label="帐号" prop="account">
+      <el-form-item label="账号" prop="account">
         <el-input v-model="accountForm.account" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
@@ -35,8 +35,8 @@ const accountForm = reactive({
 // 设置验证规则
 const accountRules = reactive<FormRules>({
   account: [
-    { required: true, message: '帐号不能为空', trigger: 'blur' },
-    { min: 6, max: 18, message: '帐号长度不小于6位和不超过18位', trigger: 'change' }
+    { required: true, message: '账号不能为空', trigger: 'blur' },
+    { min: 6, max: 18, message: '账号长度不小于6位和不超过18位', trigger: 'change' }
   ],
   password: [
     { required: true, message: '密码不能为空', trigger: 'blur' },
@@ -60,13 +60,15 @@ function loginAction(isKeep: boolean) {
       // 发请求
       accountStore.loginActionRequest({ username, password }).then((res) => {
         // 路由跳转
-        router.push('/main')
-        if (isKeep && res.status === 200) {
-          localStorage.setItem('account', username)
-          localStorage.setItem('password', password)
-        } else {
-          localStorage.removeItem('account')
-          localStorage.removeItem('password')
+        if (res.status === 200) {
+          router.push('/main')
+          if (isKeep) {
+            localStorage.setItem('account', username)
+            localStorage.setItem('password', password)
+          } else {
+            localStorage.removeItem('account')
+            localStorage.removeItem('password')
+          }
         }
       })
     } else {

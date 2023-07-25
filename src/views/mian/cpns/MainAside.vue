@@ -5,7 +5,7 @@
       <span :class="['logo-name', { 'show-name': isCollapse }]">qb管理系统</span>
     </div>
     <div class="main-aside-menu">
-      <el-menu default-active="1" text-color="#fff" :collapse="isCollapse" class="el-main-menu">
+      <el-menu default-active="1-1" text-color="#fff" :collapse="isCollapse" class="el-main-menu">
         <!-- 系统总览 -->
         <el-sub-menu index="1">
           <template #title>
