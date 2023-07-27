@@ -1,7 +1,7 @@
 <template>
   <div class="main-aside">
     <div class="logo">
-      <img src="../../../../public/favicon.ico" alt="qb_logo" class="logo-img" @click="test" />
+      <img src="" alt="qb_logo" class="logo-img" @click="test" />
       <span :class="['logo-name', { 'show-name': isCollapse }]">qb管理系统</span>
     </div>
     <div class="main-aside-menu">
