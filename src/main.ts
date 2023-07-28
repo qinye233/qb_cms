@@ -10,9 +10,15 @@ import { createPinia } from 'pinia'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'element-plus/theme-chalk/el-message.css'
 
+import useAccountStore from './stores/account/account'
+
 const app = createApp(App)
-app.use(router)
 app.use(createPinia())
+// 动态注册路由
+const accountStore = useAccountStore()
+accountStore.loadLocalCacheAction()
+
+app.use(router)
 app.mount('#app')
 
 // 导入所有图标
