@@ -8,7 +8,8 @@
       </div>
       <div class="bread-crumb">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">小面包</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ breadCrumb[0].name }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/' }">{{ breadCrumb[1].name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
@@ -49,7 +50,11 @@
 <script setup lang="ts">
 import { LOGIN_TOKEN } from '@/constants'
 import router from '@/router'
+import { mapBreadCrumb } from '@/utils/menu-handle'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+import useAccountStore from '@/stores/account/account'
+import { computed } from 'vue'
 
 const isCollapse = ref(false)
 const emit = defineEmits(['changeCollapse'])
@@ -64,6 +69,12 @@ function handleItem(command: string | number | object) {
     router.push('/login')
   }
 }
+
+const route = useRoute()
+const accountStore = useAccountStore()
+const breadCrumb = computed(() => {
+  return mapBreadCrumb(route.path, accountStore.menuTree)
+})
 </script>
 
 <style scoped lang="less">

@@ -9,6 +9,7 @@ import { createPinia } from 'pinia'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'element-plus/theme-chalk/el-message.css'
+import 'dayjs/locale/zh-cn'
 
 import useAccountStore from './stores/account/account'
 

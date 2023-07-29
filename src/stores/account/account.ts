@@ -3,7 +3,7 @@ import login from '@/service/module/login'
 import type { Account } from '@/types'
 import { LOGIN_TOKEN } from '@/constants'
 import { getMenuTree, getUserInfo } from '@/service/module/main'
-import getAllUrls from '../../utils/getAllUrls'
+import { getAllUrls } from '../../utils/menu-handle'
 import menuRoute from '@/router/routes'
 import router from '@/router'
 
@@ -68,10 +68,6 @@ const useAccountStore = defineStore('account', {
         this.userInfo = userInfo
         this.menuTree = menuTree
         // 动态添加路由
-        console.log(token)
-        console.log(userInfo)
-        console.log(menuTree)
-        console.log('动态添加路由成功！')
         const urls = getAllUrls(this.menuTree)
         menuRoute.forEach((route) => {
           for (const url of urls) {

@@ -9,7 +9,6 @@
 <style scoped lang="less">
 .main-content {
   height: 100%;
-  background-color: var(--main-bg-color);
 }
 .main-content::before {
   content: ' ';

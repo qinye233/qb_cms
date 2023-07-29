@@ -9,15 +9,21 @@
       <span :class="['logo-name', { 'show-name': isCollapse }]">qb管理系统</span>
     </div>
     <div class="main-aside-menu">
-      <el-menu default-active="7" text-color="#fff" :collapse="isCollapse" class="el-main-menu">
+      <el-menu
+        :default-active="menuId"
+        text-color="#fff"
+        :collapse="isCollapse"
+        class="el-main-menu"
+      >
         <!-- 动态菜单 -->
         <template v-for="item in menuTree" :key="item.id">
-          <el-sub-menu :index="item.id">
+          <el-sub-menu :index="String(item.id)">
             <template #title>
+              <el-icon><component :is="item.icon"></component></el-icon>
               <span>{{ item.name }}</span>
             </template>
             <template v-for="subTree in item.children" :key="subTree.id">
-              <el-menu-item :index="subTree.id" @click="handleDisplay(subTree.url)">{{
+              <el-menu-item :index="String(subTree.id)" @click="handleDisplay(subTree.url)">{{
                 subTree.name
               }}</el-menu-item>
             </template>
@@ -30,7 +36,9 @@
 
 <script setup lang="ts">
 import router from '@/router'
+import { useRoute } from 'vue-router'
 import useAccountStore from '@/stores/account/account'
+import { mapPathToMenu } from '@/utils/menu-handle'
 
 defineProps({
   isCollapse: {
@@ -45,6 +53,10 @@ const menuTree = accountStore.menuTree
 function handleDisplay(path: string) {
   router.push(path)
 }
+
+const route = useRoute()
+const active = mapPathToMenu(route.path, menuTree)
+const menuId = String(active.id)
 </script>
 
 <style scoped lang="less">

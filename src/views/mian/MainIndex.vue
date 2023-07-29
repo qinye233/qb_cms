@@ -51,6 +51,6 @@ function handleAsideCollapse(isCollapse: boolean) {
   padding: 0;
 }
 .el-main {
-  padding: 0;
+  background-color: var(--main-bg-color);
 }
 </style>
