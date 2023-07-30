@@ -24,7 +24,7 @@
             class="m-2"
             placeholder="请选择查询状态"
             style="width: 100%"
-            v-model="userSearchForm.enable"
+            v-model="isEnable"
           >
             <el-option label="启用" value="1" />
             <el-option label="禁用" value="0" />
@@ -65,10 +65,13 @@ const userSearchForm = reactive({
   createAt: ''
 })
 const formRef = ref<FormInstance>()
+// 重置数据
 function hanedleRefreshBtn() {
   if (!formRef.value) return
   formRef.value.resetFields()
 }
+
+const isEnable = ref(userSearchForm.enable ? '启用' : '禁用')
 </script>
 
 <style scoped lang="less">

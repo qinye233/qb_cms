@@ -9,7 +9,7 @@
       <div class="bread-crumb">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item>{{ breadCrumb[0].name }}</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/' }">{{ breadCrumb[1].name }}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ breadCrumb[1].name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
