@@ -50,6 +50,12 @@ class QbRequset {
   post(config: qbRequsetConfig) {
     return this.request({ ...config, method: 'POST' })
   }
+  patch(config: qbRequsetConfig) {
+    return this.request({ ...config, method: 'PATCH' })
+}
+  delete(config: qbRequsetConfig) {
+    return this.request({ ...config, method: 'DELETE' })
+}
 }
 
 export default QbRequset

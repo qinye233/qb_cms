@@ -10,6 +10,7 @@ export function getAllUrls(data: Array<any>) {
   return urls
 }
 
+// 匹配菜单
 export function mapPathToMenu(path: string, menuTree: any) {
   for (const menu of menuTree) {
     for (const subMenu of menu.children) {
@@ -20,6 +21,7 @@ export function mapPathToMenu(path: string, menuTree: any) {
   }
 }
 
+// 面包屑
 export function mapBreadCrumb(path: string, menuTree: any): any[] {
   const breadCrumb: object[] = []
   for (const menu of menuTree) {

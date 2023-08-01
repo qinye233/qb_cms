@@ -27,8 +27,10 @@
         <el-table-column prop="dep_id" label="部门编号" width="120px" />
         <el-table-column prop="role_id" label="角色编号" width="120px" />
         <el-table-column label="操作" width="200px">
+          <template #default="scope">
           <el-button text icon="Edit" type="primary" size="small">编辑</el-button>
-          <el-button text icon="Delete" type="danger" size="small">删除</el-button>
+          <el-button text icon="Delete" type="danger" size="small" @click="deleteUser(scope.row.id)">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -53,8 +55,15 @@ const adminStore = useAdminStore()
 adminStore.fetchUserList({ size: 10, offset: 1 })
 const { userList, pageTotal } = storeToRefs(adminStore)
 
+// 换页请求
 function handleChangePage(index: number) {
   adminStore.fetchUserList({ size: 10, offset: index })
+}
+
+// 删除请求
+function deleteUser(userId: number) {
+  // 删除数据
+  adminStore.fetchDeleteUser(userId)
 }
 </script>
 
