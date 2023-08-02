@@ -2,7 +2,7 @@
   <div class="user-content">
     <div class="header">
       <h3>用户列表</h3>
-      <el-button type="primary">新增用户</el-button>
+      <el-button type="primary" @click="handleUserNewClick">新增用户</el-button>
     </div>
     <div class="user-list">
       <el-table
@@ -28,8 +28,15 @@
         <el-table-column prop="role_id" label="角色编号" width="120px" />
         <el-table-column label="操作" width="200px">
           <template #default="scope">
-          <el-button text icon="Edit" type="primary" size="small">编辑</el-button>
-          <el-button text icon="Delete" type="danger" size="small" @click="deleteUser(scope.row.id)">删除</el-button>
+            <el-button text icon="Edit" type="primary" size="small">编辑</el-button>
+            <el-button
+              text
+              icon="Delete"
+              type="danger"
+              size="small"
+              @click="deleteUser(scope.row.id)"
+              >删除</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -64,6 +71,11 @@ function handleChangePage(index: number) {
 function deleteUser(userId: number) {
   // 删除数据
   adminStore.fetchDeleteUser(userId)
+}
+
+const emit = defineEmits(['newBtnClick'])
+function handleUserNewClick() {
+  emit('newBtnClick')
 }
 </script>
 

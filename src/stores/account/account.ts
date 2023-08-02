@@ -4,6 +4,7 @@ import type { Account } from '@/types'
 import { LOGIN_TOKEN } from '@/constants'
 import { getMenuTree, getUserInfo } from '@/service/module/main'
 import { getAllUrls } from '../../utils/menu-handle'
+import useMainStore from '../mian/main'
 import menuRoute from '@/router/routes'
 import router from '@/router'
 
@@ -46,6 +47,10 @@ const useAccountStore = defineStore('account', {
       localStorage.setItem('userInfo', JSON.stringify(this.userInfo))
       localStorage.setItem('menuTree', JSON.stringify(this.menuTree))
 
+      // 对部门和角色信息请求
+      const mainStore = useMainStore()
+      mainStore.fetchAllDepAndRole()
+
       // 通过菜单添加路由(动态路由)
       const urls = getAllUrls(this.menuTree)
       menuRoute.forEach((route) => {
@@ -67,6 +72,11 @@ const useAccountStore = defineStore('account', {
         this.token = token
         this.userInfo = userInfo
         this.menuTree = menuTree
+
+        // 对部门和角色信息请求
+        const mainStore = useMainStore()
+        mainStore.fetchAllDepAndRole()
+
         // 动态添加路由
         const urls = getAllUrls(this.menuTree)
         menuRoute.forEach((route) => {

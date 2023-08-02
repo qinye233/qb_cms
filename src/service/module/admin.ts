@@ -1,3 +1,4 @@
+import type { UserInfo } from '@/types/admin'
 import qbRequset from '..'
 
 import type { UserListArg } from '@/types'
@@ -13,9 +14,17 @@ export function getUserList(userList: UserListArg) {
 // 删除用户方法
 export function deleteUser(userId: number) {
   return qbRequset.delete({
-    url: 'user',
+    url: '/user',
     data: {
       userId
     }
+  })
+}
+
+// 添加新用户
+export function addNewUser(userInfo: UserInfo) {
+  return qbRequset.post({
+    url: '/user',
+    data: userInfo
   })
 }
