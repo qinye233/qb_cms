@@ -4,7 +4,7 @@
       <user-search />
     </div>
     <div class="user-content">
-      <user-content @newBtnClick="hanleNewUser" />
+      <user-content @newBtnClick="hanleNewUser" @updateBtnClick="handleUpdateUser" />
     </div>
     <user-modal ref="modalRef" />
   </div>
@@ -19,8 +19,16 @@ import { ref } from 'vue'
 
 const modalRef = ref<InstanceType<typeof UserModal>>()
 function hanleNewUser() {
-  modalRef.value?.handleModalVisible()
+  modalRef.value?.handleModalVisible(true)
+}
+function handleUpdateUser(row: any) {
+  modalRef.value?.handleModalVisible(false, row)
 }
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.admin-user {
+  height: 100%;
+  position: relative;
+}
+</style>

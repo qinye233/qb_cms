@@ -28,7 +28,9 @@
         <el-table-column prop="role_id" label="角色编号" width="120px" />
         <el-table-column label="操作" width="200px">
           <template #default="scope">
-            <el-button text icon="Edit" type="primary" size="small">编辑</el-button>
+            <el-button text icon="Edit" type="primary" size="small" @click="updateUser(scope.row)"
+              >编辑</el-button
+            >
             <el-button
               text
               icon="Delete"
@@ -59,6 +61,7 @@ import useAdminStore from '@/stores/mian/admin'
 import { storeToRefs } from 'pinia'
 
 const adminStore = useAdminStore()
+// 请求用户列表
 adminStore.fetchUserList({ size: 10, offset: 1 })
 const { userList, pageTotal } = storeToRefs(adminStore)
 
@@ -73,7 +76,13 @@ function deleteUser(userId: number) {
   adminStore.fetchDeleteUser(userId)
 }
 
-const emit = defineEmits(['newBtnClick'])
+const emit = defineEmits(['newBtnClick', 'updateBtnClick'])
+// 编辑用户
+function updateUser(row: any) {
+  emit('updateBtnClick', row)
+}
+
+// 添加用户
 function handleUserNewClick() {
   emit('newBtnClick')
 }
@@ -83,7 +92,6 @@ function handleUserNewClick() {
 .user-content {
   background-color: #fff;
   margin-top: 20px;
-  margin-bottom: 20px;
   padding: 12px 20px;
   .header {
     display: flex;

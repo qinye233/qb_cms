@@ -1,6 +1,6 @@
 <template>
   <div class="user-modal">
-    <el-dialog v-model="dialogVisible" title="新增用户" width="30%">
+    <el-dialog v-model="dialogVisible" :title="isNewRef ? '新建用户' : '编辑用户'" width="30%">
       <el-form label-width="80px" size="large" :model="userInfo">
         <el-form-item label="用户名">
           <el-input v-model="userInfo.username" placeholder="请输入用户名"></el-input>
@@ -8,7 +8,7 @@
         <el-form-item label="真实姓名" required>
           <el-input v-model="userInfo.real_name" placeholder="请输入真实姓名"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item label="密码" v-if="isNewRef">
           <el-input v-model="userInfo.password" placeholder="请输入密码" show-password></el-input>
         </el-form-item>
         <el-form-item label="邮箱">
@@ -40,21 +40,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import useMainStore from '@/stores/mian/main'
-import { addNewUser } from '@/service/module/admin';
+import useAdminStore from '@/stores/mian/admin'
 
 const dialogVisible = ref(false)
 
-// 显示modal框
-function handleModalVisible() {
-  dialogVisible.value = true
-}
-
-defineExpose({ handleModalVisible })
-
-const userInfo = reactive({
+const userInfo = reactive<any>({
   username: '',
   real_name: '',
   password: '',
@@ -62,13 +54,50 @@ const userInfo = reactive({
   role_id: '',
   dep_id: ''
 })
+
+const isNewRef = ref(true)
+let userId = 0
+
+// 显示modal框
+function handleModalVisible(isNew: boolean, row?: any) {
+  dialogVisible.value = true
+  // 设置不是添加用户
+  isNewRef.value = isNew
+  // 编辑操作
+  if (!isNew && row) {
+    // 记录userId
+    userId = row.id
+
+    // 参数处理（由于设计问题，出现NAME，username两种参数，无法进行遍历操作）
+    userInfo['username'] = row['NAME']
+    userInfo['real_name'] = row['real_name']
+    userInfo['email'] = row['email']
+    userInfo['role_id'] = row['role_id']
+    userInfo['dep_id'] = row['dep_id']
+    delete userInfo.password
+    // 添加用户操作
+  } else {
+    for (const key in userInfo) {
+      userInfo[key] = ''
+    }
+    userId = 0
+  }
+}
+
+defineExpose({ handleModalVisible })
+
 // 获取部门和角色数据
 const { roleInfo, depInfo } = useMainStore()
 
+const adminStore = useAdminStore()
 // 新增用户按钮
-function confirmAddNewUser() {
+async function confirmAddNewUser() {
   dialogVisible.value = false
-  addNewUser(userInfo)
+  if (!isNewRef.value) {
+    adminStore.fetchUpdateUser({ userId, modifyArg: userInfo })
+  } else {
+    adminStore.fetchAddNewUser(userInfo)
+  }
 }
 </script>
 

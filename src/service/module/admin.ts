@@ -1,4 +1,4 @@
-import type { UserInfo } from '@/types/admin'
+import type { UserInfo, UpdateInfo } from '@/types/admin'
 import qbRequset from '..'
 
 import type { UserListArg } from '@/types'
@@ -26,5 +26,12 @@ export function addNewUser(userInfo: UserInfo) {
   return qbRequset.post({
     url: '/user',
     data: userInfo
+  })
+}
+
+export function updateUser(update: UpdateInfo) {
+  return qbRequset.patch({
+    url: '/user',
+    data: update
   })
 }
