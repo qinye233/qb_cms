@@ -30,31 +30,28 @@ const useAdminStore = defineStore('adminStore', {
     // 获取用户列表
     async fetchUserList(arg: UserListArg) {
       const userList = await getUserList(arg)
-      console.log('成功获取用户列表')
       this.userList = userList.data.data
       this.pageTotal = userList.data.pageTotal
+      console.log(userList.data.data)
       console.log(this.userList)
     },
     // 删除用户
-    async fetchDeleteUser(userId: number) {
-      const deleteResult = await deleteUser(userId)
-      console.log(deleteResult)
+    fetchDeleteUser(userId: number) {
+      deleteUser(userId)
 
       // 重新请求数据，做到及时更新页面数据展示
       this.fetchUserList({ size: 10, offset: 1 })
     },
     // 增添用户
-    async fetchAddNewUser(userInfo: UserInfo) {
-      const addResult = addNewUser(userInfo)
-      console.log(addResult)
+    fetchAddNewUser(userInfo: UserInfo) {
+      addNewUser(userInfo)
 
       // 重新请求数据，做到及时更新页面数据展示
       this.fetchUserList({ size: 10, offset: 1 })
     },
     // 编辑用户
-    async fetchUpdateUser(update: UpdateInfo) {
-      const updateResult = updateUser(update)
-      console.log(updateResult)
+    fetchUpdateUser(update: UpdateInfo) {
+      updateUser(update)
 
       // 重新请求数据，做到及时更新页面数据展示
       this.fetchUserList({ size: 10, offset: 1 })

@@ -12,7 +12,7 @@
           <el-input placeholder="请输入查询用户名" v-model="userSearchForm.name" />
         </el-form-item>
         <el-form-item label="真实姓名" class="user-search-item1" prop="realName">
-          <el-input placeholder="请输入查询姓名" v-model="userSearchForm.realName" />
+          <el-input placeholder="请输入查询姓名" v-model="userSearchForm.real_name" />
         </el-form-item>
         <el-form-item label="邮箱" class="user-search-item1" prop="email">
           <el-input placeholder="请输入查询的邮箱" size="large" v-model="userSearchForm.email" />
@@ -47,7 +47,7 @@
         <el-icon><Refresh /></el-icon>
         <span>重置</span>
       </el-button>
-      <el-button type="primary">
+      <el-button type="primary" @click="handleQueryBtn">
         <el-icon><Search /></el-icon>
         <span>查询</span>
       </el-button>
@@ -59,19 +59,26 @@ import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 const userSearchForm = reactive({
   name: '',
-  realName: '',
+  real_name: '',
   email: '',
   enable: 1,
   createAt: ''
 })
 const formRef = ref<FormInstance>()
+const emit = defineEmits(['queryBtnClick', 'resetBtnClick'])
+
 // 重置数据
 function hanedleRefreshBtn() {
   if (!formRef.value) return
   formRef.value.resetFields()
+  emit('resetBtnClick')
 }
 
 const isEnable = ref(userSearchForm.enable ? '启用' : '禁用')
+
+function handleQueryBtn() {
+  emit('queryBtnClick', userSearchForm)
+}
 </script>
 
 <style scoped lang="less">

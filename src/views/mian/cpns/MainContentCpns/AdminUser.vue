@@ -1,10 +1,10 @@
 <template>
   <div class="admin-user">
     <div class="user-search">
-      <user-search />
+      <user-search @queryBtnClick="handleQuery" @resetBtnClick="handleReset" />
     </div>
     <div class="user-content">
-      <user-content @newBtnClick="hanleNewUser" @updateBtnClick="handleUpdateUser" />
+      <user-content @newBtnClick="hanleNewUser" @updateBtnClick="handleUpdateUser" ref="ctxRef" />
     </div>
     <user-modal ref="modalRef" />
   </div>
@@ -18,9 +18,21 @@ import UserModal from './AdminCpns/UserModal.vue'
 import { ref } from 'vue'
 
 const modalRef = ref<InstanceType<typeof UserModal>>()
+const ctxRef = ref<InstanceType<typeof UserContent>>()
+// 点击查询
+function handleQuery(formData: any) {
+  ctxRef.value?.fetchListData(formData)
+}
+// 点击重置
+function handleReset() {
+  ctxRef.value?.fetchListData()
+}
+
+//点击新建
 function hanleNewUser() {
   modalRef.value?.handleModalVisible(true)
 }
+// 点击编辑
 function handleUpdateUser(row: any) {
   modalRef.value?.handleModalVisible(false, row)
 }

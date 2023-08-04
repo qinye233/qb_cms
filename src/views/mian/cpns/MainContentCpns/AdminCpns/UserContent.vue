@@ -61,13 +61,21 @@ import useAdminStore from '@/stores/mian/admin'
 import { storeToRefs } from 'pinia'
 
 const adminStore = useAdminStore()
-// 请求用户列表
-adminStore.fetchUserList({ size: 10, offset: 1 })
 const { userList, pageTotal } = storeToRefs(adminStore)
+
+// 请求用户列表
+function fetchListData(queryFormData?: any) {
+  adminStore.fetchUserList({ size: 10, offset: 1, ...queryFormData })
+}
+defineExpose({ fetchListData })
+
+fetchListData()
 
 // 换页请求
 function handleChangePage(index: number) {
-  adminStore.fetchUserList({ size: 10, offset: index })
+  if (pageTotal.value) {
+    adminStore.fetchUserList({ size: 10, offset: index })
+  }
 }
 
 // 删除请求
@@ -92,6 +100,7 @@ function handleUserNewClick() {
 .user-content {
   background-color: #fff;
   margin-top: 20px;
+  margin-bottom: 20px !important;
   padding: 12px 20px;
   .header {
     display: flex;
