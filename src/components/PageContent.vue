@@ -1,5 +1,5 @@
 <template>
-  <div class="user-content">
+  <div class="content">
     <div class="header">
       <h3>用户列表</h3>
       <el-button type="primary" @click="handleUserNewClick">新增用户</el-button>
@@ -97,7 +97,7 @@ function handleUserNewClick() {
 </script>
 
 <style scoped lang="less">
-.user-content {
+.content {
   background-color: #fff;
   margin-top: 20px;
   padding: 12px 20px;
