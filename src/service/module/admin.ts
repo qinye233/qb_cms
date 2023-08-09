@@ -29,9 +29,17 @@ export function addNewUser(userInfo: UserInfo) {
   })
 }
 
+// 编辑用户
 export function updateUser(update: UpdateInfo) {
   return qbRequset.patch({
     url: '/user',
     data: update
+  })
+}
+
+export function getList<listType>(pageName: string, listArg: listType) {
+  return qbRequset.post({
+    url: `/${pageName}/list`,
+    data: listArg
   })
 }
