@@ -1,7 +1,12 @@
 <template>
   <div class="admin-department">
     <page-search :searchConfig="departmentFormConfig" />
-    <page-content :contentConfig="departmentContentConfig" />
+    <page-content :contentConfig="departmentContentConfig">
+      <template #enable="scope">
+        <el-tag v-if="scope.row.enable" type="success">启用</el-tag>
+        <el-tag v-else type="danger">禁用</el-tag>
+      </template>
+    </page-content>
   </div>
 </template>
 

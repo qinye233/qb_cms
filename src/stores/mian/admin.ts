@@ -1,28 +1,11 @@
 import { defineStore } from 'pinia'
 import type { UserListArg } from '@/types'
-import { getUserList, deleteUser, addNewUser, updateUser } from '@/service/module/admin'
+import { getUserList, deleteUser, addNewUser, updateUser, getList } from '@/service/module/admin'
 import type { UserInfo, UpdateInfo } from '@/types/admin'
 
-interface userList {
-  userList: Daum[]
-  pageTotal: number
-}
-
-interface Daum {
-  id: number
-  NAME: string
-  real_name: string
-  PASSWORD: string
-  enable: number
-  email: string
-  dep_id: number
-  role_id: number
-  create_at: string
-  update_at: string
-}
-
 const useAdminStore = defineStore('adminStore', {
-  state: (): userList => ({
+  state: (): any => ({
+    list: [],
     userList: [],
     pageTotal: 0
   }),
@@ -55,6 +38,12 @@ const useAdminStore = defineStore('adminStore', {
 
       // 重新请求数据，做到及时更新页面数据展示
       this.fetchUserList({ size: 10, offset: 1 })
+    },
+
+    async fetchList<listType>(pageName: string, listArg: listType) {
+      const list = await getList(pageName, listArg)
+      this.list = list.data.data
+      this.pageTotal = list.data.pageTotal
     }
   }
 })

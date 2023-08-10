@@ -1,46 +1,54 @@
 <template>
   <div class="content">
     <div class="header">
-      <h3>用户列表</h3>
-      <el-button type="primary" @click="handleUserNewClick">新增用户</el-button>
+      <h3>{{ contentConfig.header.title }}</h3>
+      <el-button type="primary" @click="handleUserNewClick">{{
+        contentConfig.header.btnTitle
+      }}</el-button>
     </div>
     <div class="user-list">
       <el-table
-        :data="userList"
+        :data="list"
         :cell-style="{ 'text-align': 'center' }"
         :header-cell-style="{ 'text-align': 'center' }"
         stripe
         border
         fit
       >
-        <el-table-column type="selection" />
-        <el-table-column prop="id" label="ID" width="50px" />
-        <el-table-column prop="NAME" label="昵称" width="150px" />
-        <el-table-column prop="real_name" label="真实姓名" width="120px" />
-        <el-table-column prop="enable" label="状态" width="120px">
-          <template #default="scope">
-            <el-tag v-if="scope.row.enable" type="success">启用</el-tag>
-            <el-tag v-else type="danger">禁用</el-tag>
+        <template v-for="item in contentConfig.tableList" :key="item.prop">
+          <template v-if="item.type === 'handler'">
+            <el-table-column v-bind="item">
+              <template #default="scope">
+                <el-button
+                  text
+                  icon="Edit"
+                  type="primary"
+                  size="small"
+                  @click="updateUser(scope.row)"
+                  >编辑</el-button
+                >
+                <el-button
+                  text
+                  icon="Delete"
+                  type="danger"
+                  size="small"
+                  @click="deleteUser(scope.row.id)"
+                  >删除</el-button
+                >
+              </template>
+            </el-table-column></template
+          >
+          <template v-else-if="item.type === 'custom'">
+            <el-table-column v-bind="item">
+              <template #default="scope">
+                <slot :name="item.slotName" v-bind="scope"></slot>
+              </template>
+            </el-table-column>
           </template>
-        </el-table-column>
-        <el-table-column prop="email" label="邮箱" />
-        <el-table-column prop="dep_id" label="部门编号" width="120px" />
-        <el-table-column prop="role_id" label="角色编号" width="120px" />
-        <el-table-column label="操作" width="200px">
-          <template #default="scope">
-            <el-button text icon="Edit" type="primary" size="small" @click="updateUser(scope.row)"
-              >编辑</el-button
-            >
-            <el-button
-              text
-              icon="Delete"
-              type="danger"
-              size="small"
-              @click="deleteUser(scope.row.id)"
-              >删除</el-button
-            >
+          <template v-else>
+            <el-table-column v-bind="item"></el-table-column>
           </template>
-        </el-table-column>
+        </template>
       </el-table>
     </div>
     <div class="pagination">
@@ -60,12 +68,25 @@
 import useAdminStore from '@/stores/mian/admin'
 import { storeToRefs } from 'pinia'
 
+interface Props {
+  contentConfig: {
+    pageName: string
+    header: {
+      title: string
+      btnTitle: string
+    }
+    tableList: any
+  }
+}
+
+const props = defineProps<Props>()
+
 const adminStore = useAdminStore()
-const { userList, pageTotal } = storeToRefs(adminStore)
+const { list, pageTotal } = storeToRefs(adminStore)
 
 // 请求用户列表
 function fetchListData(queryFormData?: any) {
-  adminStore.fetchUserList({ size: 10, offset: 1, ...queryFormData })
+  adminStore.fetchList(props.contentConfig.pageName, { size: 10, offset: 1, ...queryFormData })
 }
 defineExpose({ fetchListData })
 
@@ -74,7 +95,7 @@ fetchListData()
 // 换页请求
 function handleChangePage(index: number) {
   if (pageTotal.value) {
-    adminStore.fetchUserList({ size: 10, offset: index })
+    adminStore.fetchList(props.contentConfig.pageName, { size: 10, offset: index })
   }
 }
 

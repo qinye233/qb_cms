@@ -23,6 +23,6 @@ export function getAllRole() {
 // 获得全部部门信息
 export function getAllDeps() {
   return qbRequset.get({
-    url: 'dep/list'
+    url: 'department/list'
   })
 }
