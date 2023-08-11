@@ -37,9 +37,36 @@ export function updateUser(update: UpdateInfo) {
   })
 }
 
+// 重写通用的方法
+// 获取数据列表
 export function getList<listType>(pageName: string, listArg: listType) {
   return qbRequset.post({
     url: `/${pageName}/list`,
     data: listArg
+  })
+}
+// 删除用户方法
+export function deleteData(pageName: string, id: number) {
+  return qbRequset.delete({
+    url: `/${pageName}`,
+    data: {
+      id
+    }
+  })
+}
+
+// 添加新用户
+export function addNewData<NewInfo>(pageName: string, add: NewInfo) {
+  return qbRequset.post({
+    url: `/${pageName}`,
+    data: add
+  })
+}
+
+// 编辑用户
+export function updateData<UpdateInfo>(pageName: string, update: UpdateInfo) {
+  return qbRequset.patch({
+    url: `/${pageName}`,
+    data: update
   })
 }

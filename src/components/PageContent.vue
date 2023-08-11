@@ -2,7 +2,7 @@
   <div class="content">
     <div class="header">
       <h3>{{ contentConfig.header.title }}</h3>
-      <el-button type="primary" @click="handleUserNewClick">{{
+      <el-button type="primary" @click="handleNewClick">{{
         contentConfig.header.btnTitle
       }}</el-button>
     </div>
@@ -24,7 +24,7 @@
                   icon="Edit"
                   type="primary"
                   size="small"
-                  @click="updateUser(scope.row)"
+                  @click="updateData(scope.row)"
                   >编辑</el-button
                 >
                 <el-button
@@ -32,7 +32,7 @@
                   icon="Delete"
                   type="danger"
                   size="small"
-                  @click="deleteUser(scope.row.id)"
+                  @click="deleteData(scope.row.id)"
                   >删除</el-button
                 >
               </template>
@@ -100,19 +100,19 @@ function handleChangePage(index: number) {
 }
 
 // 删除请求
-function deleteUser(userId: number) {
+function deleteData(id: number) {
   // 删除数据
-  adminStore.fetchDeleteUser(userId)
+  adminStore.fetchDeleteData(props.contentConfig.pageName, id)
 }
 
 const emit = defineEmits(['newBtnClick', 'updateBtnClick'])
 // 编辑用户
-function updateUser(row: any) {
+function updateData(row: any) {
   emit('updateBtnClick', row)
 }
 
 // 添加用户
-function handleUserNewClick() {
+function handleNewClick() {
   emit('newBtnClick')
 }
 </script>

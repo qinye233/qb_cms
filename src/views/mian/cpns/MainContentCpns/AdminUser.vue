@@ -4,7 +4,7 @@
       <user-search @queryBtnClick="handleQuery" @resetBtnClick="handleReset" />
     </div>
     <div class="user-content">
-      <user-content @newBtnClick="hanleNewUser" @updateBtnClick="handleUpdateUser" ref="ctxRef" />
+      <user-content @newBtnClick="handleNewUser" @updateBtnClick="handleUpdateUser" ref="ctxRef" />
     </div>
     <user-modal ref="modalRef" />
   </div>
@@ -29,7 +29,7 @@ function handleReset() {
 }
 
 //点击新建
-function hanleNewUser() {
+function handleNewUser() {
   modalRef.value?.handleModalVisible(true)
 }
 // 点击编辑

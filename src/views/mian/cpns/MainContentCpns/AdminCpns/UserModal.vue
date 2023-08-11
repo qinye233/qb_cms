@@ -94,7 +94,7 @@ const adminStore = useAdminStore()
 async function confirmAddNewUser() {
   dialogVisible.value = false
   if (!isNewRef.value) {
-    adminStore.fetchUpdateUser({ userId, modifyArg: userInfo })
+    adminStore.fetchUpdateUser({ userId: userId, modifyArg: userInfo })
   } else {
     adminStore.fetchAddNewUser(userInfo)
   }

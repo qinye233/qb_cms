@@ -44,9 +44,11 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
     PageContent: typeof import('./src/components/PageContent.vue')['default']
+    PageModal: typeof import('./src/components/PageModal.vue')['default']
     PageSearch: typeof import('./src/components/PageSearch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UserModal: typeof import('./src/components/UserModal.vue')['default']
     UserSearch: typeof import('./src/components/UserSearch.vue')['default']
   }
 }
