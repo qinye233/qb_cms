@@ -29,27 +29,11 @@ import departmentFormConfig from './departmentConfig/search.config'
 import departmentContentConfig from './departmentConfig/content.config'
 import departmentModalConfig from './departmentConfig/modal.config'
 
-import { ref } from 'vue'
+import useModalSearch from '@/hooks/usePageContent'
 
-const modalRef = ref<InstanceType<typeof PageModal>>()
-const ctxRef = ref<InstanceType<typeof PageContent>>()
-// 点击查询
-function handleQuery(formData: any) {
-  ctxRef.value?.fetchListData(formData)
-}
-// 点击重置
-function handleReset() {
-  ctxRef.value?.fetchListData()
-}
-
-//点击新建
-function handleNewClick() {
-  modalRef.value?.handleModalVisible(true)
-}
-// 点击编辑
-function handleUpdateClick(row: any) {
-  modalRef.value?.handleModalVisible(false, row)
-}
+const { modalRef, ctxRef, handleQuery, handleReset, handleNewClick, handleUpdateClick } =
+  useModalSearch()
 </script>
 
 <style scoped lang="less"></style>
+@/hooks/usePageContent

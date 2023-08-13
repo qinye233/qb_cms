@@ -11,6 +11,7 @@
         :data="list"
         :cell-style="{ 'text-align': 'center' }"
         :header-cell-style="{ 'text-align': 'center' }"
+        row-key="id"
         stripe
         border
         fit
@@ -83,8 +84,7 @@ const props = defineProps<Props>()
 
 const adminStore = useAdminStore()
 const { list, pageTotal } = storeToRefs(adminStore)
-
-// 请求用户列表
+// 请求列表
 function fetchListData(queryFormData?: any) {
   adminStore.fetchList(props.contentConfig.pageName, { size: 10, offset: 1, ...queryFormData })
 }
