@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import type PageModal from '@/components/PageModal.vue'
 import type PageContent from '@/components/PageContent.vue'
-function useModalSearch() {
+function useModalSearch(editCallback?: any, newCallBack?: any) {
   const modalRef = ref<InstanceType<typeof PageModal>>()
   const ctxRef = ref<InstanceType<typeof PageContent>>()
   // 点击查询
@@ -15,11 +15,13 @@ function useModalSearch() {
 
   //点击新建
   function handleNewClick() {
+    if (newCallBack) newCallBack()
     modalRef.value?.handleModalVisible(true)
   }
   // 点击编辑
   function handleUpdateClick(row: any) {
     modalRef.value?.handleModalVisible(false, row)
+    if (editCallback) editCallback(row)
   }
   return {
     modalRef,

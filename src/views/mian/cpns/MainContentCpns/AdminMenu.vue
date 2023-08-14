@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 import PageContent from '@/components/PageContent.vue'
+import PageModal from '@/components/PageModal.vue'
 
 import menuModalConfig from './menuConfig/modal.config'
 import menuContentConfig from './menuConfig/content.config'

@@ -10,6 +10,18 @@ export function getAllUrls(data: Array<any>) {
   return urls
 }
 
+export function getAllId(data: Array<any>) {
+  let ids: string[] = []
+  data.forEach((item) => {
+    ids.push(item.id)
+    if (item.children) {
+      const childrenIds = getAllId(item.children)
+      ids = ids.concat(childrenIds)
+    }
+  })
+  return ids
+}
+
 // 匹配菜单
 export function mapPathToMenu(path: string, menuTree: any) {
   for (const menu of menuTree) {

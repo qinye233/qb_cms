@@ -14,6 +14,9 @@
                 :placeholder="config.placeholder"
               ></el-input>
             </template>
+            <template v-if="config.type === 'custom'">
+              <slot :name="config.slotName" ></slot>
+            </template>
             <template v-if="config.type === 'select'">
               <el-select
                 v-model="formData[config.prop]"
