@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import * as echarts from 'echarts'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watchEffect } from 'vue'
 import type { EChartsOption } from 'echarts'
 import ChinaJSON from './data/china.json'
 const chartRef = ref<HTMLElement>()
@@ -18,7 +18,7 @@ interface Props {
 const props = defineProps<Props>()
 onMounted(() => {
   const chartInstance = echarts.init(chartRef.value!)
-  chartInstance.setOption(props.option)
+  watchEffect(() => chartInstance.setOption(props.option))
   window.addEventListener('resize', () => {
     chartInstance.resize()
   })

@@ -6,6 +6,11 @@
 import BaseChart from './BaseChart.vue'
 import type { EChartsOption } from 'echarts'
 
+const props = defineProps<{
+  labels: any
+  values: any
+}>()
+
 const option: EChartsOption = {
   tooltip: {
     trigger: 'axis',

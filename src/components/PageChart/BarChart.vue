@@ -1,13 +1,13 @@
 <template>
   <div class="bar-echart">
-    <base-echart :options="options"></base-echart>
+    <base-chart :option="options"></base-chart>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import * as echarts from 'echarts'
-import BaseEchart from './base-echart.vue'
+import BaseChart from './BaseChart.vue'
 import type { EChartsOption } from 'echarts'
 
 const props = defineProps<{
