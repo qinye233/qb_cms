@@ -14,7 +14,10 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
+    "countup.js": "^2.7.1",
+    "echarts": "^5.4.3",
     "element-plus": "^2.3.8",
+    "mockjs": "^1.1.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.4",
     "vue": "^3.3.4",
@@ -23,6 +26,7 @@
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
     "@tsconfig/node18": "^2.0.1",
+    "@types/mockjs": "^1.0.7",
     "@types/node": "^18.16.17",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
