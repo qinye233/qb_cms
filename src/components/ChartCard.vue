@@ -17,11 +17,13 @@ defineProps<Props>()
 
 <style scoped lang="less">
 .chart-card {
+  width: 100%;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   margin-top: 10px;
   .header {
     padding: 20px;
+    font-weight: 600;
   }
   .el-divider--horizontal {
     margin: 0;
