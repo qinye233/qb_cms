@@ -129,7 +129,7 @@ const tree = `
 
 <style scoped lang="less">
 .tree {
-  .pre {
+  pre {
     margin: 0;
   }
   padding: 0 20px;

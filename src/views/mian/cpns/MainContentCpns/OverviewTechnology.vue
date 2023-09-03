@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import ChartCard from '@/components/ChartCard.vue'
 import TechStack from './overviewCpns/TechStack.vue'
-import Tree from './overviewCpns/Tree.vue'
+import Tree from './overviewCpns/DirectoryTree.vue'
 </script>
 
 <style scoped lang="less">
