@@ -8,7 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BarChart: typeof import('./src/components/PageChart/BarChart.vue')['default']
-    BarEchart: typeof import('./src/components/PageChart/bar-echart.vue')['default']
     BaseChart: typeof import('./src/components/PageChart/BaseChart.vue')['default']
     ChartCard: typeof import('./src/components/ChartCard.vue')['default']
     CountCard: typeof import('./src/components/CountCard.vue')['default']
@@ -37,16 +36,12 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
-    ElOpation: typeof import('element-plus/es')['ElOpation']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
-    ElTableCloum: typeof import('element-plus/es')['ElTableCloum']
-    ElTableCloumn: typeof import('element-plus/es')['ElTableCloumn']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
@@ -62,7 +57,5 @@ declare module 'vue' {
     RoseChart: typeof import('./src/components/PageChart/RoseChart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    UserModal: typeof import('./src/components/UserModal.vue')['default']
-    UserSearch: typeof import('./src/components/UserSearch.vue')['default']
   }
 }
