@@ -10,6 +10,7 @@ import {
   updateData,
   addNewData
 } from '@/service/module/admin'
+import maskEmail from '@/utils/maskEmail'
 import type { UserInfo, UpdateInfo } from '@/types/admin'
 
 const useAdminStore = defineStore('adminStore', {
@@ -24,6 +25,10 @@ const useAdminStore = defineStore('adminStore', {
       const userList = await getUserList(arg)
       this.userList = userList.data.data
       this.pageTotal = userList.data.pageTotal
+
+      for(const user of this.userList) {
+        user.email = maskEmail(user.email)
+      }
     },
     // 删除用户
     fetchDeleteUser(userId: number) {
